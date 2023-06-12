@@ -132,15 +132,5 @@ fn md5(input: &[u8]) -> u128 {
     });
 
     // Produce the final hash value
-    u128::from_be_bytes(
-        [
-            a0.to_le_bytes(),
-            b0.to_le_bytes(),
-            c0.to_le_bytes(),
-            d0.to_le_bytes(),
-        ]
-        .concat()
-        .try_into()
-        .unwrap(),
-    )
+    ((d0 as u128) << 96 | (c0 as u128) << 64 | (b0 as u128) << 32 | (a0 as u128)).to_be()
 }
